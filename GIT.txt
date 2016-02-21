@@ -1,0 +1,128 @@
+GIT REJECTS WHEN 'B' TRIED TO PUSH WITHOUT AWARENESS OF PUSHES BY 'A'
+
+(do a GIT pull at B first check whats added and then push)
+#####################
+F:\gitdemo [master]> git push
+To https://github.com/karthikgnv/gitdemo.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/karthikgnv/gitdemo.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+#####################################################
+
+GIT GENERATES CONFLICT WHEN 'B' AND 'A' ARE WORKING ON SAME LINE OF A FILE
+
+(conflict is shown when 'B' does pull from GIT after changes pushed by 'A')
+######################################################
+F:\gitdemo [master +0 ~1 -0]> git add --all
+F:\gitdemo [master +0 ~1 -0]> git commit -m "added 4th line FFFF"
+[master e514a6a] added 4th line FFFF
+ 1 file changed, 1 insertion(+)
+F:\gitdemo [master]> git pull
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/karthikgnv/gitdemo
+   e713b46..517b8ec  master     -> origin/master
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+F:\gitdemo [master +0 ~0 -0 !1 | +0 ~0 -0 !1]>
+######################################################
+<<<<<<< HEAD
+from FFFF <\n>
+=======
+from EEEE <\n>
+>>>>>>> 517b8ec82eca1188c9054c1374b9195c5e69ac46
+######################################################
+
+GIT BRANCHING
+CREATE A BRANCH ON LOCAL
+PERFORM CHANGES REQUIRED
+GIT ADD & COMMIT
+CHECKOUT MASTER & DO GIT PULL
+GIT MERGE MASTER (to findout conflicts)
+RESOLVE IF ANY
+AGAIN GIT ADD & COMMIT
+NOW You can see branch on GITHUB
+CREATE PULL REQ
+SOMEONE WILL REVIEW AND SUGGEST CHANGES
+YOU CAN change it again on ur local and perform multiple commits based on suggestions from pull request
+THEY Check your commits and decide to merge pull request
+NOW Changes are visible in Origin/master
+
+YOU CAN NOW CHECKOUT TO YOUR MASTER AND DO GIT PULL... that will download code you modified onto your local master
+
+COMMANDS
+========
+
+git clone https://github.com/karthikgnv/gitdemo.git
+
+git add --all
+git commit -m "message"
+git push
+git status
+
+git branch
+git branch -r  (remote branches)
+git diff master origin/master
+
+git branch newbranch
+git checkout newbranch
+git merge master
+
+git pull
+or
+git fetch
+git merge
+
+
+####################################
+
+F:\gitdemo [master]> git
+usage: git [--version] [--help] [-C <path>] [-c name=value]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Find by binary search the change that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Forward-port local commits to the updated upstream head
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
